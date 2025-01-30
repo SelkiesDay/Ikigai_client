@@ -1,0 +1,51 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "tsukimi rounded";
+    color: #333;
+  }
+
+  button{
+    margin-bottom: 5%;
+    background-color: #b8b7b7;
+    color: white;
+    font-size: 13px;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    padding: 5px 10px;
+    padding-bottom: 5px;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  #ikigai{
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+
+
+  #main_container{
+    padding-top: 2%;
+    
+  }
+
+  #second_main_container{
+    margin-top: 10%;
+    padding-bottom: 2%;
+    
+  }
+
+#button_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

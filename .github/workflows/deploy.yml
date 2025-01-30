@@ -1,0 +1,31 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment when you push to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Run the job on the latest version of Ubuntu
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Get the code from your repository
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2  # Set up Node.js environment
+        with:
+          node-version: '14'  # Use Node.js version 14
+
+      - name: Install dependencies
+        run: npm install  # Install all dependencies defined in your package.json
+
+      - name: Build the project
+        run: npm run build  # Build the project (output will be in the 'dist' folder)
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4  # Action to deploy to GitHub Pages
+        with:
+          branch: gh-pages  # The branch to deploy the site (GitHub Pages uses this branch)
+          folder: dist      # The build folder that will be deployed (ensure this matches your build output)

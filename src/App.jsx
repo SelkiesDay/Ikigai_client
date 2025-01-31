@@ -17,7 +17,7 @@ import Me from './components/Me/Me.jsx';
 
 function App() {
   return (
-    <BrowserRouter basename="/Ikigai_client/">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<FirstScreen />} />
         <Route path="/welcome" element={<Welcome />} />

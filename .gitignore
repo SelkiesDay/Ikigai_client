@@ -2,3 +2,5 @@
 node_modules
 *:Zone.Identifier*
 .vite
+# Local Netlify folder
+.netlify

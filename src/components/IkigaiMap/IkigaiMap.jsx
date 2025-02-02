@@ -387,11 +387,7 @@ useEffect(() => {
         </div>
         </div>
         <div className={styles.change_page}>
-          <div className="next">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="25" height="27" >
-              <path stroke="#D9D9D9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"  d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3" onClick={() => navigate("/explore")}/>
-            </svg>
-          </div>
+            <span className={styles.next_page} onClick={() => navigate("/explore")}>next</span>
         </div>
 
       {/* Modal Rendering */}

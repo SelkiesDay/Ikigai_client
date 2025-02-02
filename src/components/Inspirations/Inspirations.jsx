@@ -185,6 +185,3 @@ const CategorySlider = ({ title, items }) => {
 };
 
 export default Inspirations;
-
-
-

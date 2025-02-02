@@ -13,8 +13,6 @@ function FirstScreen() {
     { char: "a", style: { top: "50%", left: "30%" } },
     { char: "i", style: { top: "60%", left: "40%" } },
   ];
-  //{ char: "i", style: { top: "10%", left: "50%" } },
-
 
     useEffect(() => {
      const timer = setTimeout(()=>{
@@ -40,7 +38,6 @@ function FirstScreen() {
         </span>
       ))}
     </div>
-    
   );
 }
 

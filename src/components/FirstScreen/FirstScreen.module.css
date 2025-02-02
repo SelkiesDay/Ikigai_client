@@ -1,11 +1,17 @@
 
 
 .container {
+  
     position: relative; 
     width: 100vw;
     height: 100vh;
     background-color: white; /* Or any background you prefer */
     overflow: hidden;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+    
   }
   
 .letter {
@@ -17,6 +23,7 @@
     animation: fadeIn 1s forwards, dissolve 1s 3s forwards;
     padding: 80px;
     font-family:  "Tsukimi rounded";
+    
   }
   
 
@@ -32,3 +39,31 @@
     }
   }
   
+
+  @media screen and (max-width: 375px) and (max-height: 667px) {
+    .container {
+      right: 10%;
+      width: 90vw; /* Increase width to fit smaller screens */
+      height: 90vh;
+      font-size: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 375px) and (max-height: 667px) {
+    .container {
+     right: 10%;
+      width: 90vw; /* Increase width to fit smaller screens */
+      height: 90vh;
+      font-size: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .container {
+      left: 1.5%;
+      width:100vw;
+      height: 100vh;
+    }
+  }
+
+

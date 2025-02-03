@@ -82,8 +82,17 @@ p{
 
 
 
-  @media screen and (max-width: 375px) and (max-height: 667px) {
+  @media screen and (max-width: 480px) and (max-height: 667px) {
     .frame {
       margin-top: 30%;
     }
   }
+
+
+
+/* Tablet-Friendly Styles (Medium Screens) */
+@media screen and (max-width: 768px) {
+  .frame {
+    margin-top: 30%;
+  }
+}

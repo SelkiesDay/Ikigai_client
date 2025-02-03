@@ -266,7 +266,7 @@
   justify-content: space-between;
 }
 
-@media screen and (max-width: 375px) and (max-height: 667px) {
+@media screen and (max-width: 480px) and (max-height: 667px) {
   .left_branch{
     position: absolute;
     top: 40px;

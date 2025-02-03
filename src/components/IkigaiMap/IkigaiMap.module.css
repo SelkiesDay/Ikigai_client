@@ -300,6 +300,40 @@
  .ikigai_map{
     bottom: 5%;
   }
+}
+
+@media screen and (max-width: 768px) {
+  .left_branch{
+    position: absolute;
+    top: 40px;
+    left: 0px ;
+    
+   }
+   
+   .right_branch{
+     position: absolute;
+     bottom: 40px;
+     right: 0px ;
+   
+   }
+
+   .next_page{
+    position: absolute;
+    bottom: 1.5%;
+    margin-top: 15px;
+    display: flex; 
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    padding: 5px 10px;
+    padding-bottom: 5px; 
+    color: #cecece;
+  }
   
- 
+  .next_page:hover {
+    transform: scale(1.05);
+  }
+
+ .ikigai_map{
+    bottom: 5%;
+  }
 }

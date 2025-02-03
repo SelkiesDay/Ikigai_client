@@ -283,7 +283,7 @@
 
    .next_page{
     position: absolute;
-    bottom: 3%;
+    bottom: 1.5%;
     margin-top: 15px;
     display: flex; 
     cursor: pointer;

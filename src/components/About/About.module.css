@@ -31,16 +31,16 @@
   }
 
 
-  @media screen and (max-width: 480px) and (max-height: 667px) {
+  @media screen and (max-width: 480px) and (max-width: 768px) {
     .container {
-      margin-top: 30%;
+      margin-top: 20vh;
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen  and (max-width: 768px) {
     .container {
-        margin-top: 15vh;
+      margin-top: 20vh;
     }
-}
+  }
 
 

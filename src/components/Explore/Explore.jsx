@@ -212,7 +212,7 @@ export function Explore() {
       )}
 
      
-      <nav className="fixed bottom-0 left-0 w-full  text-white py-4">
+      <nav className="fixed top-0 left-0 w-full  text-white py-4">
         <div id={styles.navigation} className="flex justify-around text-center">
            <button id={styles.explore_button} className="text-l font-gotu rounded" >
             Explore

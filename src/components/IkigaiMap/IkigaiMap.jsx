@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function IkigaiMap() {
 
-  const loadFromLocalStorage = (key) => {
+  {/*const loadFromLocalStorage = (key) => {
     try {
       const storedData = localStorage.getItem(key);
       if (storedData) {
@@ -21,36 +21,82 @@ const storedTitle = localStorage.getItem('ikigaiMapTitle');
 const initialTitle = storedTitle || 'Create your ikigai map'; // Default title if not found
 
 const storedData = loadFromLocalStorage('ikigaiMapData');
-const [title, setTitle] = useState(initialTitle);
+const [title, setTitle] = useState(initialTitle);*/}
 
 
 const navigate = useNavigate();
     const [modal, setModal] = useState(null);
-    const [circleInput, setCircleInput] = useState(storedData ?? {
+    // Ikigai Map title
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [title, setTitle] = useState('Create your ikigai map');
+    const [circleInput, setCircleInput] = useState({/*storedData ??*/}, {
       'What you love': { passion: '', mission: '', conclusion: '' },
       'What the world needs': { mission: '', vocation: '', conclusion: '' },
       'What you are good at': { passion: '', profession: '', conclusion: '' },
       'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
     });
 
-const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal visibility
+//Moved following into block declaration: const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal visibility
 
-// Load data from local storage on mount
-useEffect(() => {
+// Load data from backend on mount
+useEffect(()=> {
+  const fetchData = async()=> {
+    try {
+      const response = await fetch ('SERVER API GOES HERE');
+      if (!response.ok){
+        throw new Error(`Error fetching data: ${response.statusText}`);
+      }
+      const data = await response.json();
+      if (data) {
+        setCircleInput(data.circleInput);
+        setTitle(data.title || 'Create your ikigai map');
+      }
+    } catch (error) {
+      console.error('Error', error);
+    }
+  };
+  fetchData();
+}, []);
+{/*useEffect(() => {
   const storedData = localStorage.getItem('ikigaiMapData');
   if (storedData) {
     setCircleInput(JSON.parse(storedData));
   }
-}, []);
+}, []);*/}
 
 // Save data to local storage whenever circleInput changes
-useEffect(() => {
+{/*useEffect(() => {
   try {
     localStorage.setItem('ikigaiMapData', JSON.stringify(circleInput));
     console.log('Data saved to local storage:', circleInput); // Debugging
   } catch (error) {
     console.error('Error saving to local storage:', error);
   }
+}, [circleInput]);*/}
+
+useEffect(() => {
+  const saveDataToBackend = async () => {
+    try {
+      const response = await fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(circleInput),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log('Data saved to backend:', data); // Debugging
+    } catch (error) {
+      console.error('Error saving to backend:', error);
+    }
+  };
+
+  saveDataToBackend();
 }, [circleInput]);
 
 useEffect(() => {
@@ -122,9 +168,12 @@ const resetAll = () => {
     'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
   };
   setCircleInput(initialData);
-  localStorage.setItem('ikigaiMapData', JSON.stringify(initialData)); // Update local storage
   setTitle('Create your ikigai map'); // Reset the title
 };
+
+try {
+  const response = await fetch('SERVER API GOES HERE')
+}
 
 const resetThisCircle = () => {
   const newCircleInput = { ...circleInput };
@@ -138,28 +187,6 @@ const resetThisCircle = () => {
   setCircleInput(newCircleInput);
   localStorage.setItem('ikigaiMapData', JSON.stringify(newCircleInput)); // Update local storage
 };
-
-{/*const handleSubmit = async () => {
-  if (areAllConclusionsFilled) {
-    try {
-      const response = await fetch('/api/submit-ikigai', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(circleInput),
-      });
-      
-      if (response.ok) {
-        alert('Your Ikigai Map has been submitted successfully!');
-        resetAll(); // Optionally reset after submission
-      } else {
-        alert('Submission failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting Ikigai Map:', error);
-      alert('An error occurred while submitting.');
-    }
-  }
-};*/}
 
    return (
      <div className={styles.main_container}>

@@ -1,0 +1,21 @@
+
+.backButton {
+    font-family: 'Gotu', sans-serif;
+    color: #5e5e5e;
+    background-color: #5E5E5E70;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    box-shadow: 2px 4px 6px rgba(0,0,0,0.2);
+    font-size: clamp(12px, 2vw, 14px);
+    font-weight: 600;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import styles from './IkigaiDescription.module.css';
+import BackButton from "../BackButton/backbutton";
 
 function IkigaiDescription (){
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ function IkigaiDescription (){
             <button className={styles.button} onClick={()=>navigate("/login")}>
                 Continue
             </button>
+            <BackButton>Back</BackButton>
             </div>
             
         </div>

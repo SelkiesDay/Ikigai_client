@@ -114,6 +114,52 @@ useEffect(() => {
   }
 }, [circleInput]);
 
+const resetAll = () => {
+  const initialData = {
+    'What you love': { passion: '', mission: '', conclusion: '' },
+    'What the world needs': { mission: '', vocation: '', conclusion: '' },
+    'What you are good at': { passion: '', profession: '', conclusion: '' },
+    'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
+  };
+  setCircleInput(initialData);
+  localStorage.setItem('ikigaiMapData', JSON.stringify(initialData)); // Update local storage
+  setTitle('Create your ikigai map'); // Reset the title
+};
+
+const resetThisCircle = () => {
+  const newCircleInput = { ...circleInput };
+  newCircleInput[modal] = {
+    passion: '',
+    mission: '',
+    vocation: '',
+    profession: '',
+    conclusion: '',
+  };
+  setCircleInput(newCircleInput);
+  localStorage.setItem('ikigaiMapData', JSON.stringify(newCircleInput)); // Update local storage
+};
+
+{/*const handleSubmit = async () => {
+  if (areAllConclusionsFilled) {
+    try {
+      const response = await fetch('/api/submit-ikigai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(circleInput),
+      });
+      
+      if (response.ok) {
+        alert('Your Ikigai Map has been submitted successfully!');
+        resetAll(); // Optionally reset after submission
+      } else {
+        alert('Submission failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting Ikigai Map:', error);
+      alert('An error occurred while submitting.');
+    }
+  }
+};*/}
 
    return (
      <div className={styles.main_container}>
@@ -385,9 +431,13 @@ useEffect(() => {
             <path d="M19.0812 125.536C19.0199 125.446 18.9782 125.325 18.9562 125.172C18.9294 125.01 18.9443 124.849 19.0009 124.691L19.1302 124.33L17.5032 123.748C17.4483 123.592 17.4266 123.427 17.438 123.253C17.4446 123.068 17.4748 122.901 17.5287 122.75L19.4495 123.437L20.2416 121.222C20.367 121.276 20.4627 121.353 20.5289 121.453C20.5902 121.543 20.6033 121.636 20.5683 121.734L19.9014 123.599L23.6075 124.924C23.8485 125.011 24.0538 125.054 24.2233 125.055C24.388 125.046 24.5293 125.008 24.6472 124.939C24.7651 124.871 24.862 124.778 24.9379 124.661C25.0138 124.544 25.0761 124.417 25.1246 124.282C25.2135 124.033 25.2386 123.808 25.1999 123.608C25.1613 123.407 25.1081 123.235 25.0404 123.092C25.1082 122.997 25.1965 122.952 25.3052 122.957C25.352 123.016 25.4095 123.105 25.4778 123.223C25.5461 123.341 25.605 123.485 25.6544 123.656C25.6963 123.824 25.7174 124.014 25.7179 124.226C25.7183 124.439 25.6768 124.662 25.5932 124.895C25.5178 125.106 25.42 125.297 25.3 125.466C25.1799 125.635 25.034 125.77 24.8623 125.87C24.6932 125.963 24.4922 126.014 24.2592 126.024C24.0262 126.034 23.759 125.985 23.4577 125.878L19.5822 124.491L19.1942 125.576L19.0812 125.536Z" fill="black"/>
           </svg>
         </div>
-        </div>
-        <div className={styles.change_page}>
-            <span className={styles.next_page} onClick={() => navigate("/explore")}>next</span>
+        {/* This is potential button for submitting to backend*/}
+        {/*<button>
+        onClick={handleSubmit} 
+        disabled={!areAllConclusionsFilled} 
+        className={`${styles.submit_button} ${!areAllConclusionsFilled ? styles.disabled : ''}`}
+        Submit Ikigai Map
+        </button>*/}
         </div>
 
       {/* Modal Rendering */}
@@ -437,14 +487,44 @@ useEffect(() => {
               }}>
               Switch Circle
               </button>
-            {areAllConclusionsFilled && modal === 'What you are good at' && (
-              <button className={styles.complete_button} onClick={() => {closeModal();}}>Complete</button>)}
+
+              <button
+    className={styles.switch_button}
+    onClick={() => {
+      const sections = [
+        'What you love',
+        'What the world needs',
+        'What you can be paid for',
+        'What you are good at',
+      ];
+      const currentIndex = sections.indexOf(modal);
+      const prevIndex = (currentIndex - 1 + sections.length) % sections.length;
+      setModal(sections[prevIndex]);
+    }}>
+    Previous Circle
+    </button>
+
+    {areAllConclusionsFilled && modal === 'What you are good at' && (
+  <button className={styles.complete_button} onClick={closeModal}>
+    Complete This Circle
+  </button>
+)}
+
+ 
+ {/*{areAllConclusionsFilled && modal === 'What you are good at' && (
+   <button className={styles.complete_button} onClick={() => {closeModal();}}>Complete</button>)}*/}
           </div>
         <div className={styles.close_button}>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 11L11 1M1 1L11 11" stroke="#E55430" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" onClick={closeModal}/>
           </svg>
-        </div>
+        </div>    
+<button onClick={resetThisCircle} className={styles.reset_button}>
+  Reset This Circle
+</button>
+<button onClick={resetAll} className={styles.reset_button}>
+  Reset All
+</button>
       </div>
       )}
       </div>

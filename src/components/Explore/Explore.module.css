@@ -16,17 +16,18 @@
 button{
   background-color: #b8b7b7;
   color: white;
-  font-size: 13px;
+  font-size: 20px !important; 
   border: none;
   border-radius: 11px;
   cursor: pointer;
   transition: transform 0.2s, background-color 0.2s;
+  transform: scale(0.8);
   padding: 5px 10px;
-  padding-bottom: 5px;
 }
 
 button:hover {
   transform: scale(1.05);
+  color: #333;
 }
 
 #overlay{
@@ -35,19 +36,21 @@ button:hover {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(177, 201, 238, 0.3); /* Semi-transparent black */
-  backdrop-filter: blur(5px);    /* Apply blur effect */
+  background: rgba(177, 201, 238, 0.3); 
+  backdrop-filter: blur(5px);    
   z-index: 10;
 }
 
 #navigation{
-  height: 35px;
+  height: 70px; 
   border-radius: 3px 3px 0px 0px;
-  background-color: #b8b7b7;  
+  background-color: #b8b7b7;
+  padding-top: 20px; 
 }
 
 #main_container{
   margin-top: 5%;
+  padding-top: 100px;
 }
 
 #ikigai{
@@ -71,9 +74,9 @@ img{
   color: #333;
 }
 
-#explore_button{
+/* #explore_button{
   color: #333;
-}
+} */
 
 #modal_container{
   padding:  15px;

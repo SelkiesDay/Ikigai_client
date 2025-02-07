@@ -23,6 +23,7 @@ const initialTitle = storedTitle || 'Create your ikigai map'; // Default title i
 const storedData = loadFromLocalStorage('ikigaiMapData');
 const [title, setTitle] = useState(initialTitle);*/}
 
+// STATE INITIALISATION & NAVIGATION
 
 const navigate = useNavigate();
     const [modal, setModal] = useState(null);
@@ -35,7 +36,7 @@ const navigate = useNavigate();
       'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
     });
 
-// Load data from backend on mount
+// FETCH DATA FROM BACKEND (GET)
 useEffect(()=> {
   const fetchData = async()=> {
     try {
@@ -95,6 +96,8 @@ useEffect(()=> {
   }
 }, [circleInput]);*/}
 
+// SAVE DATA TO BACKEND WHEN STATE CHANGES (POST)
+
 useEffect(() => {
   const saveDataToBackend = async () => {
     const requestBody ={
@@ -145,7 +148,7 @@ useEffect(() => {
   saveDataToBackend();
 },[circleInput]);
 
-// Manages the modal open/close state
+// MANAGE OPEN/CLOSE OF MODAL
 
 useEffect(() => {
   if (isModalOpen) {
@@ -154,6 +157,8 @@ useEffect(() => {
     document.body.classList.remove('modal-open');
   }
 }, [isModalOpen]);
+
+// QUESTIONS FOR EACH IKIGAI CIRCLE
 
 const questions = {     
   'What you love': {
@@ -178,20 +183,29 @@ const questions = {
   },
 };
 
+// INPUT HANDLERS 
+
 // Handle user input for each subsection
 const handleText = (section, subsection, text) => {
   setCircleInput((previousState) => ({
   ...previousState, [section]: { ...previousState[section], [subsection]: text },}));
 };
 
-// Handle conclusion input
+// UPDATE TITLE WHEN ALL CONCLUSIONS FILLED
 const handleConclusion = (section, text) => {
   setCircleInput((previousState) => ({...previousState, [section]: { ...previousState[section], conclusion: text },}));};
-    
+   
 const areAllConclusionsFilled = Object.values(circleInput).every(
     (section) => section.conclusion.trim() !== ''
   );
 
+useEffect(() => {
+  if (areAllConclusionsFilled) {
+    setTitle('My Ikigai Map');
+  }
+}, [circleInput, areAllConclusionsFilled]);
+
+// OPEN/CLOSE MODAL
 const openModal = (section) => {
   setModal(section);
   setIsModalOpen(true); // Show modal
@@ -202,11 +216,7 @@ const closeModal = () => {
   setIsModalOpen(false); // Hide modal
 };
 
-useEffect(() => {
-  if (areAllConclusionsFilled) {
-    setTitle('My Ikigai Map');
-  }
-}, [circleInput, areAllConclusionsFilled]);
+// RESET FUNCTIONS
 
 const resetAll = () => {
   const initialData = {

@@ -26,17 +26,14 @@ const [title, setTitle] = useState(initialTitle);*/}
 
 const navigate = useNavigate();
     const [modal, setModal] = useState(null);
-    // Ikigai Map title
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [title, setTitle] = useState('Create your ikigai map');
-    const [circleInput, setCircleInput] = useState({/*storedData ??*/}, {
+    const [circleInput, setCircleInput] = useState({
       'What you love': { passion: '', mission: '', conclusion: '' },
       'What the world needs': { mission: '', vocation: '', conclusion: '' },
       'What you are good at': { passion: '', profession: '', conclusion: '' },
       'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
     });
-
-//Moved following into block declaration: const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal visibility
 
 // Load data from backend on mount
 useEffect(()=> {
@@ -47,17 +44,41 @@ useEffect(()=> {
         throw new Error(`Error fetching data: ${response.statusText}`);
       }
       const data = await response.json();
-      if (data) {
-        setCircleInput(data.circleInput);
+      if (data && data.circle_values) {
+        setCircleInput({
+          'What you love': {
+            passion: data.circle_values.love[0] || '',
+            mission: data.circle_values.love[1] || '',
+            conclusion: data.circle_values.love[2] || '',
+          },
+          'What the world needs': {
+            mission: data.circle_values.needs[0] || '',
+            vocation: data.circle_values.needs[1] || '',
+            conclusion: data.circle_values.needs[2] || '',
+          },
+          'What you are good at': {
+            passion: data.circle_values.talents[0] || '',
+            profession: data.circle_values.talents[1] || '',
+            conclusion: data.circle_values.talents[2] || '',
+          },
+          'What you can be paid for': {
+            vocation: data.circle_values.paid[0] || '',
+            profession: data.circle_values.paid[1] || '',
+            conclusion: data.circle_values.paid[2] || '',
+          },
+        });
         setTitle(data.title || 'Create your ikigai map');
       }
     } catch (error) {
-      console.error('Error', error);
+      console.error('Error fetching data:', error);
     }
-  };
+  };  
   fetchData();
 }, []);
-{/*useEffect(() => {
+
+{/*
+  THIS IS THE OLD METHOD OF SAVING DATA TO LOCAL STORAGE
+  useEffect(() => {
   const storedData = localStorage.getItem('ikigaiMapData');
   if (storedData) {
     setCircleInput(JSON.parse(storedData));
@@ -76,28 +97,55 @@ useEffect(()=> {
 
 useEffect(() => {
   const saveDataToBackend = async () => {
+    const requestBody ={
+      circle_values: {
+        love: [
+          circleInput['What you love'].passion || '',
+          circleInput['What you love'].mission || '',
+          circleInput['What you love'].conclusion || '',
+        ],
+        talents: [
+          circleInput['What you are good at'].passion || '',
+          circleInput['What you are good at'].profession || '',
+          circleInput['What you are good at'].conclusion || '',
+        ],
+        paid: [
+          circleInput['What you can be paid for'].vocation || '',
+          circleInput['What you can be paid for'].profession || '',
+          circleInput['What you can be paid for'].conclusion || '',
+        ],
+        needs: [
+          circleInput['What the world needs'].mission || '',
+          circleInput['What the world needs'].vocation || '',
+          circleInput['What the world needs'].conclusion || '',
+        ],
+      },
+    };
+    
     try {
-      const response = await fetch('', {
+      const response = await fetch('SERVER API GOES HERE', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(circleInput),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
+        throw new Error(`Error saving data: ${response.statusText}`);
       }
 
       const data = await response.json();
-      console.log('Data saved to backend:', data); // Debugging
+      console.log('Data saved to backend:', data);
     } catch (error) {
       console.error('Error saving to backend:', error);
     }
   };
 
   saveDataToBackend();
-}, [circleInput]);
+},[circleInput]);
+
+// Manages the modal open/close state
 
 useEffect(() => {
   if (isModalOpen) {
@@ -158,7 +206,7 @@ useEffect(() => {
   if (areAllConclusionsFilled) {
     setTitle('My Ikigai Map');
   }
-}, [circleInput]);
+}, [circleInput, areAllConclusionsFilled]);
 
 const resetAll = () => {
   const initialData = {
@@ -168,24 +216,42 @@ const resetAll = () => {
     'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
   };
   setCircleInput(initialData);
-  setTitle('Create your ikigai map'); // Reset the title
+  setTitle('Create your ikigai map'); 
 };
 
-try {
-  const response = await fetch('SERVER API GOES HERE')
-}
+const resetThisCircle = async () => {
+    const initialValues = {
+      'What you love': { passion: '', mission: '', conclusion: '' },
+    'What the world needs': { mission: '', vocation: '', conclusion: '' },
+    'What you are good at': { passion: '', profession: '', conclusion: '' },
+    'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
+    };
 
-const resetThisCircle = () => {
-  const newCircleInput = { ...circleInput };
-  newCircleInput[modal] = {
-    passion: '',
-    mission: '',
-    vocation: '',
-    profession: '',
-    conclusion: '',
-  };
-  setCircleInput(newCircleInput);
-  localStorage.setItem('ikigaiMapData', JSON.stringify(newCircleInput)); // Update local storage
+    const newCircleInput = {...circleInput, [modal]: initialValues[modal]};
+    setCircleInput(newCircleInput);
+
+    try {
+      const response = await fetch('SERVER API GOES HERE', {
+        method: 'PUT', // This might be 'POST' instead
+        headers: {
+          'Content-Type':'application/json',
+        },
+        body: JSON.stringify({
+          circle_values: {
+            love: [newCircleInput['What you love'].passion, newCircleInput['What you love'].mission, newCircleInput['What you love'].conclusion],
+            talents: [newCircleInput['What you are good at'].passion, newCircleInput['What you are good at'].profession, newCircleInput['What you are good at'].conclusion],
+            paid: [newCircleInput['What you can be paid for'].vocation, newCircleInput['What you can be paid for'].profession, newCircleInput['What you can be paid for'].conclusion],
+            needs: [newCircleInput['What the world needs'].mission, newCircleInput['What the world needs'].vocation, newCircleInput['What the world needs'].conclusion],
+          },
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Error resetting in backend: ${response.statusText}`);
+      }
+      console.log('Reset successful:', await response.json());
+    } catch (error) {
+      console.error('Error resetting in backend:', error);
+    }
 };
 
    return (

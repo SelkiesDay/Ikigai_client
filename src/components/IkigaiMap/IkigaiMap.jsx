@@ -41,7 +41,7 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAsImVtYWlsIjoibWFuaXNoYUBleGFtcGxlLmNvbSIsImlhdCI6MTczODQ5NDU0OCwiZXhwIjoxNzM4NDk4MTQ4fQ.QvfY2gnPkE3SMCOigaOLEbbqDngrcsACUGn6S82NwFI'; 
-      const response = await fetch('https://8955-78-29-192-45.ngrok-free.app/api/user/5', {
+      const response = await fetch('https://40f2-78-29-192-45.ngrok-free.app/api/user/4', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -108,37 +108,37 @@ useEffect(() => {
     const requestBody ={
       circle_values: {
         love: [
-          circleInput['What you love'].passion || '',
-          circleInput['What you love'].mission || '',
+          //circleInput['What you love'].passion || '',
+          //circleInput['What you love'].mission || '',
           circleInput['What you love'].conclusion || '',
         ],
         talents: [
-          circleInput['What you are good at'].passion || '',
-          circleInput['What you are good at'].profession || '',
+          //circleInput['What you are good at'].passion || '',
+          //circleInput['What you are good at'].profession || '',
           circleInput['What you are good at'].conclusion || '',
         ],
         paid: [
-          circleInput['What you can be paid for'].vocation || '',
-          circleInput['What you can be paid for'].profession || '',
+          //circleInput['What you can be paid for'].vocation || '',
+          //circleInput['What you can be paid for'].profession || '',
           circleInput['What you can be paid for'].conclusion || '',
         ],
         needs: [
-          circleInput['What the world needs'].mission || '',
-          circleInput['What the world needs'].vocation || '',
+          //circleInput['What the world needs'].mission || '',
+          //circleInput['What the world needs'].vocation || '',
           circleInput['What the world needs'].conclusion || '',
         ],
       },
     };
-    
+    console.log('Request body:', requestBody);
     try {
       const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAsImVtYWlsIjoibWFuaXNoYUBleGFtcGxlLmNvbSIsImlhdCI6MTczODQ5NDU0OCwiZXhwIjoxNzM4NDk4MTQ4fQ.QvfY2gnPkE3SMCOigaOLEbbqDngrcsACUGn6S82NwFI'; 
-      const response = await fetch('https://8955-78-29-192-45.ngrok-free.app/api/user/5', {
+      const response = await fetch('https://40f2-78-29-192-45.ngrok-free.app/api/user/4', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Include the token in the Authorisation header
         },
-        body: JSON.stringify({circle_values: circleInput}),
+        body: JSON.stringify(requestBody),
       });
       if (!response.ok) {
         throw new Error(`Error saving data: ${response.statusText}`);

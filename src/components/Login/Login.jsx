@@ -1,34 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css"; // Importing CSS module
 
 function Login() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
-    // Handle login logic here (e.g., form validation, API calls)
-    navigate("/explore"); // Navigate to the explore page after successful login
+
+    try {
+      const response = await fetch('YOUR_BACKEND_API_URL/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      // Handle successful login (e.g., store token, navigate to another page)
+      console.log('Login successful:', data);
+      navigate("/explore"); // Navigate to the explore page after successful login
+    } catch (error) {
+      console.error('Login failed:', error);
+      setError('Login failed. Please check your credentials and try again.');
+    }
   };
 
   return (
     <div className={styles.container}>
-       <div><span className={styles.title}>Ikiga-i</span></div>
-        <div className={styles.login_title}> 
-          <span className={styles.subtitle}>Log in</span>
-        </div>
-         <div className={styles.login_container}>
-           <form onSubmit={handleLogin}>
+      <div><span className={styles.title}>Ikiga-i</span></div>
+      <div className={styles.login_title}> 
+        <span className={styles.subtitle}>Log in</span>
+      </div>
+      <div className={styles.login_container}>
+        <form onSubmit={handleLogin}>
           <div className={styles.email}>
-              <label htmlFor="email">Email</label> <br />
-              <input id="email" className={styles.email_container} type="text" placeholder="Enter your email"/>{" "}
+            <label htmlFor="email">Email</label> <br />
+            <input
+              id="email"
+              className={styles.email_container}
+              type="text"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />{" "}
           </div>
           <div className={styles.password_container}>
-          <label htmlFor="password">Password</label>  <br />
-          <input
-            id="password" className={styles.password} type="password" placeholder="Enter your password"/>{" "}
+            <label htmlFor="password">Password</label>  <br />
+            <input
+              id="password"
+              className={styles.password}
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />{" "}
           </div>
-          <div ><button type="submit" className={styles.login_button}>Log In</button></div>
+          {error && <div className={styles.error}>{error}</div>}
+          <button type="submit" className={styles.login_button}>Log In</button>
         </form>
       </div>
       <div className={styles.alternative}>

@@ -37,11 +37,18 @@ const navigate = useNavigate();
     });
 
 // FETCH DATA FROM BACKEND (GET)
-useEffect(()=> {
-  const fetchData = async()=> {
+useEffect(() => {
+  const fetchData = async () => {
     try {
-      const response = await fetch ('SERVER API GOES HERE');
-      if (!response.ok){
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAsImVtYWlsIjoibWFuaXNoYUBleGFtcGxlLmNvbSIsImlhdCI6MTczODQ5NDU0OCwiZXhwIjoxNzM4NDk4MTQ4fQ.QvfY2gnPkE3SMCOigaOLEbbqDngrcsACUGn6S82NwFI'; 
+      const response = await fetch('https://8955-78-29-192-45.ngrok-free.app/api/user/5', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+        },
+      });
+      if (!response.ok) {
         throw new Error(`Error fetching data: ${response.statusText}`);
       }
       const data = await response.json();
@@ -68,12 +75,11 @@ useEffect(()=> {
             conclusion: data.circle_values.paid[2] || '',
           },
         });
-        setTitle(data.title || 'Create your ikigai map');
       }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  };  
+  };
   fetchData();
 }, []);
 
@@ -98,8 +104,7 @@ useEffect(()=> {
 
 // SAVE DATA TO BACKEND WHEN STATE CHANGES (POST)
 
-useEffect(() => {
-  const saveDataToBackend = async () => {
+  const handleSubmit = async () => {
     const requestBody ={
       circle_values: {
         love: [
@@ -126,27 +131,23 @@ useEffect(() => {
     };
     
     try {
-      const response = await fetch('SERVER API GOES HERE', {
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAsImVtYWlsIjoibWFuaXNoYUBleGFtcGxlLmNvbSIsImlhdCI6MTczODQ5NDU0OCwiZXhwIjoxNzM4NDk4MTQ4fQ.QvfY2gnPkE3SMCOigaOLEbbqDngrcsACUGn6S82NwFI'; 
+      const response = await fetch('https://8955-78-29-192-45.ngrok-free.app/api/user/5', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Include the token in the Authorisation header
         },
-        body: JSON.stringify(requestBody),
+        body: JSON.stringify({circle_values: circleInput}),
       });
-
       if (!response.ok) {
         throw new Error(`Error saving data: ${response.statusText}`);
       }
-
-      const data = await response.json();
-      console.log('Data saved to backend:', data);
+      console.log('Data saved to backend:', await response.json());
     } catch (error) {
       console.error('Error saving to backend:', error);
     }
   };
-
-  saveDataToBackend();
-},[circleInput]);
 
 // MANAGE OPEN/CLOSE OF MODAL
 
@@ -608,7 +609,7 @@ const resetThisCircle = async () => {
     </button>
 
     {areAllConclusionsFilled && modal === 'What you are good at' && (
-  <button className={styles.complete_button} onClick={closeModal}>
+  <button className={styles.complete_button} onClick={handleSubmit}>
     Complete This Circle
   </button>
 )}

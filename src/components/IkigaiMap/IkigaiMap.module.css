@@ -5,13 +5,14 @@
   padding: 0;
   box-sizing: border-box;
 }
-  body{
+
+/* body{
   
-}
+} */
 
 .main_container{
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,9 +87,6 @@
     justify-content: center;
    
 }
-
-
-
 
 .next_page{
   margin-top: 15px;

@@ -17,7 +17,7 @@ export default function SignUp() {
     event.preventDefault(); 
   
     // Send form data to backend server
-    const response = await fetch('https://d67f-2a02-2788-1066-1009-d4e7-8a2-ed6-b9fe.ngrok-free.app/api/register', {
+    const response = await fetch('https://8955-78-29-192-45.ngrok-free.app/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

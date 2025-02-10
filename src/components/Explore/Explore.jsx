@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./Explore.module.css"
+import styles from "./Explore.module.css";
+// import Navbar from "../Navbar/Navbar";
 
 
 const philosophies = [
@@ -211,7 +212,7 @@ export function Explore() {
         </div>
       )}
 
-     
+{/*      
       <nav className="fixed top-0 left-0 w-full  text-white py-4">
         <div id={styles.navigation} className="flex justify-around text-center">
            <button id={styles.explore_button} className="text-l font-gotu rounded" >
@@ -230,7 +231,7 @@ export function Explore() {
             Me
           </button>
         </div>
-      </nav>
+      </nav> */}
     </div>
     </div>
   );

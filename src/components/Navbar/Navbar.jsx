@@ -5,11 +5,14 @@ import styles from "./Navbar.module.css"; // You can modify the CSS as needed
 
 const Navbar = () => {
   const navigate = useNavigate();
+  
 
   return (
-    <nav className="fixed top-0 left-0 w-full text-white py-4">
+    <nav className={styles.Navbar}>
       <div id={styles.navigation} className="flex justify-around text-center">
-        <button id={styles.explore_button} className="text-l font-gotu rounded">
+        <button id={styles.explore_button} className="text-l font-gotu rounded"
+          onClick={() => navigate("/explore")}
+        >
           Explore
         </button>
         <button

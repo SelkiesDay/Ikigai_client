@@ -25,6 +25,8 @@ const [title, setTitle] = useState(initialTitle);*/}
 
 // STATE INITIALISATION & NAVIGATION
 
+
+
 const navigate = useNavigate();
     const [modal, setModal] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,50 +38,103 @@ const navigate = useNavigate();
       'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
     });
 
+    const fetchData = () => {
+      console.log("i should only appear once")
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InRlc3RAbWFuaXNoYS5jb20iLCJmaXJzdF9uYW1lIjoiTWFuaXNoYTEiLCJsYXN0X25hbWUiOiJNYW5pc2hhMSIsImlhdCI6MTczOTI4MjE1OCwiZXhwIjoxNzM5MzI1MzU4fQ.36a09mWbqNOS6DuzRPwOIe_QjNjJlEFMMn0uqfKRNSY'; 
+    
+
+
+    fetch('https://4ef0-78-29-192-45.ngrok-free.app/api/user/5/test', {
+      method: 'GET', // Works when it is POST, doesn't work when it is GET currently
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+    .then(async (response) => {
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers.get('content-type'));
+    
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    
+      const text = await response.text(); // Read body as text first
+      console.log("Raw response text:", text);
+    
+      if (!text) {
+        throw new Error("Response body is empty");
+      }
+    
+      try {
+        const data = JSON.parse(text);
+        console.log("Parsed JSON:", data);
+      } catch (error) {
+        console.error("JSON parse error:", error, "Raw text:", text);
+      }
+    })
+    .catch(error => console.error("Fetch error:", error));
+        
+  
+      // console.log("i should only appear once")
+      // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InRlc3RAbWFuaXNoYS5jb20iLCJmaXJzdF9uYW1lIjoiTWFuaXNoYTEiLCJsYXN0X25hbWUiOiJNYW5pc2hhMSIsImlhdCI6MTczOTI4MjE1OCwiZXhwIjoxNzM5MzI1MzU4fQ.36a09mWbqNOS6DuzRPwOIe_QjNjJlEFMMn0uqfKRNSY'; 
+      //   const response = await fetch('https://4ef0-78-29-192-45.ngrok-free.app/api/user/5', {
+      //     method: 'GET',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+      //     },
+      //   });
+      //   console.log(await response.json())
+      // console.log('Fetching data from backend...'); // Debugging
+      // try {
+      //   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InRlc3RAbWFuaXNoYS5jb20iLCJmaXJzdF9uYW1lIjoiTWFuaXNoYTEiLCJsYXN0X25hbWUiOiJNYW5pc2hhMSIsImlhdCI6MTczOTI4MjE1OCwiZXhwIjoxNzM5MzI1MzU4fQ.36a09mWbqNOS6DuzRPwOIe_QjNjJlEFMMn0uqfKRNSY'; 
+      //   const response = await fetch('https://4ef0-78-29-192-45.ngrok-free.app/api/user/5', {
+      //     method: 'GET',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+      //     },
+      //   });
+      //   if (!response.ok) {
+      //     throw new Error(`Error fetching data: ${response}`);
+      //   }
+      //   console.log(response);
+      //   const data = await response.json();
+      //   if (data && data.circle_values) {
+      //     setCircleInput({
+      //       'What you love': {
+      //         //passion: data.circle_values.love[0] || '',
+      //         //mission: data.circle_values.love[1] || '',
+      //         conclusion: data.circle_values.love[0] || '',
+      //       },
+      //       'What the world needs': {
+      //         //mission: data.circle_values.needs[0] || '',
+      //         //vocation: data.circle_values.needs[1] || '',
+      //         conclusion: data.circle_values.needs[0] || '',
+      //       },
+      //       'What you are good at': {
+      //         //passion: data.circle_values.talents[0] || '',
+      //         //profession: data.circle_values.talents[1] || '',
+      //         conclusion: data.circle_values.talents[0] || '',
+      //       },
+      //       'What you can be paid for': {
+      //         //vocation: data.circle_values.paid[0] || '',
+      //         //profession: data.circle_values.paid[1] || '',
+      //         conclusion: data.circle_values.paid[0] || '',
+      //       },
+      //     });
+      //   }
+      // } catch (error) {
+      //   console.error('Error fetching data:', error);
+      // }
+    };
+
 // FETCH DATA FROM BACKEND (GET)
 useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAsImVtYWlsIjoibWFuaXNoYUBleGFtcGxlLmNvbSIsImlhdCI6MTczODQ5NDU0OCwiZXhwIjoxNzM4NDk4MTQ4fQ.QvfY2gnPkE3SMCOigaOLEbbqDngrcsACUGn6S82NwFI'; 
-      const response = await fetch('https://40f2-78-29-192-45.ngrok-free.app/api/user/4', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`Error fetching data: ${response.statusText}`);
-      }
-      const data = await response.json();
-      if (data && data.circle_values) {
-        setCircleInput({
-          'What you love': {
-            passion: data.circle_values.love[0] || '',
-            mission: data.circle_values.love[1] || '',
-            conclusion: data.circle_values.love[2] || '',
-          },
-          'What the world needs': {
-            mission: data.circle_values.needs[0] || '',
-            vocation: data.circle_values.needs[1] || '',
-            conclusion: data.circle_values.needs[2] || '',
-          },
-          'What you are good at': {
-            passion: data.circle_values.talents[0] || '',
-            profession: data.circle_values.talents[1] || '',
-            conclusion: data.circle_values.talents[2] || '',
-          },
-          'What you can be paid for': {
-            vocation: data.circle_values.paid[0] || '',
-            profession: data.circle_values.paid[1] || '',
-            conclusion: data.circle_values.paid[2] || '',
-          },
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+    
+  // console.log("i should only appear once")
+
   fetchData();
 }, []);
 
@@ -107,32 +162,32 @@ useEffect(() => {
   const handleSubmit = async () => {
     const requestBody ={
       circle_values: {
-        love: [
+        love: 
           //circleInput['What you love'].passion || '',
           //circleInput['What you love'].mission || '',
           circleInput['What you love'].conclusion || '',
-        ],
-        talents: [
+        
+        talents: 
           //circleInput['What you are good at'].passion || '',
           //circleInput['What you are good at'].profession || '',
           circleInput['What you are good at'].conclusion || '',
-        ],
-        paid: [
+        
+        paid: 
           //circleInput['What you can be paid for'].vocation || '',
           //circleInput['What you can be paid for'].profession || '',
           circleInput['What you can be paid for'].conclusion || '',
-        ],
-        needs: [
+        
+        needs: 
           //circleInput['What the world needs'].mission || '',
           //circleInput['What the world needs'].vocation || '',
           circleInput['What the world needs'].conclusion || '',
-        ],
+        
       },
     };
     console.log('Request body:', requestBody);
     try {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAsImVtYWlsIjoibWFuaXNoYUBleGFtcGxlLmNvbSIsImlhdCI6MTczODQ5NDU0OCwiZXhwIjoxNzM4NDk4MTQ4fQ.QvfY2gnPkE3SMCOigaOLEbbqDngrcsACUGn6S82NwFI'; 
-      const response = await fetch('https://40f2-78-29-192-45.ngrok-free.app/api/user/4', {
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InRlc3RAbWFuaXNoYS5jb20iLCJmaXJzdF9uYW1lIjoiTWFuaXNoYTEiLCJsYXN0X25hbWUiOiJNYW5pc2hhMSIsImlhdCI6MTczOTI4MjE1OCwiZXhwIjoxNzM5MzI1MzU4fQ.36a09mWbqNOS6DuzRPwOIe_QjNjJlEFMMn0uqfKRNSY'; 
+      const response = await fetch('https://4ef0-78-29-192-45.ngrok-free.app/api/user/5', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -535,14 +590,7 @@ const resetThisCircle = async () => {
             <path d="M19.0812 125.536C19.0199 125.446 18.9782 125.325 18.9562 125.172C18.9294 125.01 18.9443 124.849 19.0009 124.691L19.1302 124.33L17.5032 123.748C17.4483 123.592 17.4266 123.427 17.438 123.253C17.4446 123.068 17.4748 122.901 17.5287 122.75L19.4495 123.437L20.2416 121.222C20.367 121.276 20.4627 121.353 20.5289 121.453C20.5902 121.543 20.6033 121.636 20.5683 121.734L19.9014 123.599L23.6075 124.924C23.8485 125.011 24.0538 125.054 24.2233 125.055C24.388 125.046 24.5293 125.008 24.6472 124.939C24.7651 124.871 24.862 124.778 24.9379 124.661C25.0138 124.544 25.0761 124.417 25.1246 124.282C25.2135 124.033 25.2386 123.808 25.1999 123.608C25.1613 123.407 25.1081 123.235 25.0404 123.092C25.1082 122.997 25.1965 122.952 25.3052 122.957C25.352 123.016 25.4095 123.105 25.4778 123.223C25.5461 123.341 25.605 123.485 25.6544 123.656C25.6963 123.824 25.7174 124.014 25.7179 124.226C25.7183 124.439 25.6768 124.662 25.5932 124.895C25.5178 125.106 25.42 125.297 25.3 125.466C25.1799 125.635 25.034 125.77 24.8623 125.87C24.6932 125.963 24.4922 126.014 24.2592 126.024C24.0262 126.034 23.759 125.985 23.4577 125.878L19.5822 124.491L19.1942 125.576L19.0812 125.536Z" fill="black"/>
           </svg>
         </div>
-        {/* This is potential button for submitting to backend*/}
-        {/*<button>
-        onClick={handleSubmit} 
-        disabled={!areAllConclusionsFilled} 
-        className={`${styles.submit_button} ${!areAllConclusionsFilled ? styles.disabled : ''}`}
-        Submit Ikigai Map
-        </button>*/}
-        </div>
+       </div>
 
       {/* Modal Rendering */}
       {/* Overlay */}

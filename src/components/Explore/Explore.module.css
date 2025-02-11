@@ -13,10 +13,10 @@
 }
 
 
-button{
-  /* background-color: #b8b7b7; */
+
+button {
   color: white;
-  font-size: 20px !important; 
+  font-size: 50px;
   border: none;
   border-radius: 11px;
   cursor: pointer;

@@ -9,8 +9,8 @@ function Login() {
   const [error, setError] = useState(""); 
   
   const handleLogin = async (event) => {
-    event.preventDefault();
 
+    event.preventDefault(); 
     try {
       const response = await fetch('https://9507-2a02-2788-1066-1009-d645-1cd8-799b-14cb.ngrok-free.app/api/login', {
         method: 'POST',

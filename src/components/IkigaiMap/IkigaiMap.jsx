@@ -5,7 +5,7 @@ import Navbar from '../Navbar/Navbar';
 
 export default function IkigaiMap() {
 
-  const loadFromLocalStorage = (key) => {
+  {/*const loadFromLocalStorage = (key) => {
     try {
       const storedData = localStorage.getItem(key);
       if (storedData) {
@@ -22,37 +22,191 @@ const storedTitle = localStorage.getItem('ikigaiMapTitle');
 const initialTitle = storedTitle || 'Create your ikigai map'; 
 
 const storedData = loadFromLocalStorage('ikigaiMapData');
-const [title, setTitle] = useState(initialTitle);
+const [title, setTitle] = useState(initialTitle);*/}
+
+// STATE INITIALISATION & NAVIGATION
+
 
 
 const navigate = useNavigate();
     const [modal, setModal] = useState(null);
-    const [circleInput, setCircleInput] = useState(storedData ?? {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [title, setTitle] = useState('Create your ikigai map');
+    const [circleInput, setCircleInput] = useState({
       'What you love': { passion: '', mission: '', conclusion: '' },
       'What the world needs': { mission: '', vocation: '', conclusion: '' },
       'What you are good at': { passion: '', profession: '', conclusion: '' },
       'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
     });
 
-const [isModalOpen, setIsModalOpen] = useState(false); 
 
-// Load data from local storage on mount
+    const fetchData = () => {
+      console.log("i should only appear once")
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InRlc3RAbWFuaXNoYS5jb20iLCJmaXJzdF9uYW1lIjoiTWFuaXNoYTEiLCJsYXN0X25hbWUiOiJNYW5pc2hhMSIsImlhdCI6MTczOTI4MjE1OCwiZXhwIjoxNzM5MzI1MzU4fQ.36a09mWbqNOS6DuzRPwOIe_QjNjJlEFMMn0uqfKRNSY'; 
+    
+
+
+    fetch('https://4ef0-78-29-192-45.ngrok-free.app/api/user/5/test', {
+      method: 'GET', // Works when it is POST, doesn't work when it is GET currently
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+    .then(async (response) => {
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers.get('content-type'));
+    
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    
+      const text = await response.text(); // Read body as text first
+      console.log("Raw response text:", text);
+    
+      if (!text) {
+        throw new Error("Response body is empty");
+      }
+    
+      try {
+        const data = JSON.parse(text);
+        console.log("Parsed JSON:", data);
+      } catch (error) {
+        console.error("JSON parse error:", error, "Raw text:", text);
+      }
+    })
+    .catch(error => console.error("Fetch error:", error));
+        
+  
+      // console.log("i should only appear once")
+      // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InRlc3RAbWFuaXNoYS5jb20iLCJmaXJzdF9uYW1lIjoiTWFuaXNoYTEiLCJsYXN0X25hbWUiOiJNYW5pc2hhMSIsImlhdCI6MTczOTI4MjE1OCwiZXhwIjoxNzM5MzI1MzU4fQ.36a09mWbqNOS6DuzRPwOIe_QjNjJlEFMMn0uqfKRNSY'; 
+      //   const response = await fetch('https://4ef0-78-29-192-45.ngrok-free.app/api/user/5', {
+      //     method: 'GET',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+      //     },
+      //   });
+      //   console.log(await response.json())
+      // console.log('Fetching data from backend...'); // Debugging
+      // try {
+      //   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InRlc3RAbWFuaXNoYS5jb20iLCJmaXJzdF9uYW1lIjoiTWFuaXNoYTEiLCJsYXN0X25hbWUiOiJNYW5pc2hhMSIsImlhdCI6MTczOTI4MjE1OCwiZXhwIjoxNzM5MzI1MzU4fQ.36a09mWbqNOS6DuzRPwOIe_QjNjJlEFMMn0uqfKRNSY'; 
+      //   const response = await fetch('https://4ef0-78-29-192-45.ngrok-free.app/api/user/5', {
+      //     method: 'GET',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+      //     },
+      //   });
+      //   if (!response.ok) {
+      //     throw new Error(`Error fetching data: ${response}`);
+      //   }
+      //   console.log(response);
+      //   const data = await response.json();
+      //   if (data && data.circle_values) {
+      //     setCircleInput({
+      //       'What you love': {
+      //         //passion: data.circle_values.love[0] || '',
+      //         //mission: data.circle_values.love[1] || '',
+      //         conclusion: data.circle_values.love[0] || '',
+      //       },
+      //       'What the world needs': {
+      //         //mission: data.circle_values.needs[0] || '',
+      //         //vocation: data.circle_values.needs[1] || '',
+      //         conclusion: data.circle_values.needs[0] || '',
+      //       },
+      //       'What you are good at': {
+      //         //passion: data.circle_values.talents[0] || '',
+      //         //profession: data.circle_values.talents[1] || '',
+      //         conclusion: data.circle_values.talents[0] || '',
+      //       },
+      //       'What you can be paid for': {
+      //         //vocation: data.circle_values.paid[0] || '',
+      //         //profession: data.circle_values.paid[1] || '',
+      //         conclusion: data.circle_values.paid[0] || '',
+      //       },
+      //     });
+      //   }
+      // } catch (error) {
+      //   console.error('Error fetching data:', error);
+      // }
+    };
+
+// FETCH DATA FROM BACKEND (GET)
 useEffect(() => {
+    
+  // console.log("i should only appear once")
+
+  fetchData();
+}, []);
+
+{/*
+  THIS IS THE OLD METHOD OF SAVING DATA TO LOCAL STORAGE
+  useEffect(() => {
   const storedData = localStorage.getItem('ikigaiMapData');
   if (storedData) {
     setCircleInput(JSON.parse(storedData));
   }
-}, []);
+}, []);*/}
 
 // Save data to local storage whenever circleInput changes
-useEffect(() => {
+{/*useEffect(() => {
   try {
     localStorage.setItem('ikigaiMapData', JSON.stringify(circleInput));
     console.log('Data saved to local storage:', circleInput);
   } catch (error) {
     console.error('Error saving to local storage:', error);
   }
-}, [circleInput]);
+}, [circleInput]);*/}
+
+// SAVE DATA TO BACKEND WHEN STATE CHANGES (POST)
+
+  const handleSubmit = async () => {
+    const requestBody ={
+      circle_values: {
+        love: 
+          //circleInput['What you love'].passion || '',
+          //circleInput['What you love'].mission || '',
+          circleInput['What you love'].conclusion || '',
+        
+        talents: 
+          //circleInput['What you are good at'].passion || '',
+          //circleInput['What you are good at'].profession || '',
+          circleInput['What you are good at'].conclusion || '',
+        
+        paid: 
+          //circleInput['What you can be paid for'].vocation || '',
+          //circleInput['What you can be paid for'].profession || '',
+          circleInput['What you can be paid for'].conclusion || '',
+        
+        needs: 
+          //circleInput['What the world needs'].mission || '',
+          //circleInput['What the world needs'].vocation || '',
+          circleInput['What the world needs'].conclusion || '',
+        
+      },
+    };
+    console.log('Request body:', requestBody);
+    try {
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InRlc3RAbWFuaXNoYS5jb20iLCJmaXJzdF9uYW1lIjoiTWFuaXNoYTEiLCJsYXN0X25hbWUiOiJNYW5pc2hhMSIsImlhdCI6MTczOTI4MjE1OCwiZXhwIjoxNzM5MzI1MzU4fQ.36a09mWbqNOS6DuzRPwOIe_QjNjJlEFMMn0uqfKRNSY'; 
+      const response = await fetch('https://4ef0-78-29-192-45.ngrok-free.app/api/user/5', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Include the token in the Authorisation header
+        },
+        body: JSON.stringify(requestBody),
+      });
+      if (!response.ok) {
+        throw new Error(`Error saving data: ${response.statusText}`);
+      }
+      console.log('Data saved to backend:', await response.json());
+    } catch (error) {
+      console.error('Error saving to backend:', error);
+    }
+  };
+
+// MANAGE OPEN/CLOSE OF MODAL
 
 useEffect(() => {
   if (isModalOpen) {
@@ -61,6 +215,8 @@ useEffect(() => {
     document.body.classList.remove('modal-open');
   }
 }, [isModalOpen]);
+
+// QUESTIONS FOR EACH IKIGAI CIRCLE
 
 const questions = {     
   'What you love': {
@@ -85,20 +241,29 @@ const questions = {
   },
 };
 
+// INPUT HANDLERS 
+
 // Handle user input for each subsection
 const handleText = (section, subsection, text) => {
   setCircleInput((previousState) => ({
   ...previousState, [section]: { ...previousState[section], [subsection]: text },}));
 };
 
-// Handle conclusion input
+// UPDATE TITLE WHEN ALL CONCLUSIONS FILLED
 const handleConclusion = (section, text) => {
   setCircleInput((previousState) => ({...previousState, [section]: { ...previousState[section], conclusion: text },}));};
-    
+   
 const areAllConclusionsFilled = Object.values(circleInput).every(
     (section) => section.conclusion.trim() !== ''
   );
 
+useEffect(() => {
+  if (areAllConclusionsFilled) {
+    setTitle('My Ikigai Map');
+  }
+}, [circleInput, areAllConclusionsFilled]);
+
+// OPEN/CLOSE MODAL
 const openModal = (section) => {
   setModal(section);
   setIsModalOpen(true);
@@ -109,11 +274,7 @@ const closeModal = () => {
   setIsModalOpen(false);
 };
 
-useEffect(() => {
-  if (areAllConclusionsFilled) {
-    setTitle('My Ikigai Map');
-  }
-}, [circleInput]);
+// RESET FUNCTIONS
 
 const resetAll = () => {
   const initialData = {
@@ -123,44 +284,45 @@ const resetAll = () => {
     'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
   };
   setCircleInput(initialData);
-  localStorage.setItem('ikigaiMapData', JSON.stringify(initialData)); // Update local storage
-  setTitle('Create your ikigai map'); // Reset the title
+  setTitle('Create your ikigai map'); 
 };
 
-const resetThisCircle = () => {
-  const newCircleInput = { ...circleInput };
-  newCircleInput[modal] = {
-    passion: '',
-    mission: '',
-    vocation: '',
-    profession: '',
-    conclusion: '',
-  };
-  setCircleInput(newCircleInput);
-  localStorage.setItem('ikigaiMapData', JSON.stringify(newCircleInput)); // Update local storage
-};
+const resetThisCircle = async () => {
+    const initialValues = {
+      'What you love': { passion: '', mission: '', conclusion: '' },
+    'What the world needs': { mission: '', vocation: '', conclusion: '' },
+    'What you are good at': { passion: '', profession: '', conclusion: '' },
+    'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
+    };
 
-{/*const handleSubmit = async () => {
-  if (areAllConclusionsFilled) {
+    const newCircleInput = {...circleInput, [modal]: initialValues[modal]};
+    setCircleInput(newCircleInput);
+
     try {
-      const response = await fetch('/api/submit-ikigai', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(circleInput),
+      const response = await fetch('SERVER API GOES HERE', {
+        method: 'PUT', // This might be 'POST' instead. Still needs to be setup in the backend
+        headers: {
+          'Content-Type':'application/json',
+        },
+        body: JSON.stringify({
+          circle_values: {
+            love: [newCircleInput['What you love'].passion, newCircleInput['What you love'].mission, newCircleInput['What you love'].conclusion],
+            talents: [newCircleInput['What you are good at'].passion, newCircleInput['What you are good at'].profession, newCircleInput['What you are good at'].conclusion],
+            paid: [newCircleInput['What you can be paid for'].vocation, newCircleInput['What you can be paid for'].profession, newCircleInput['What you can be paid for'].conclusion],
+            needs: [newCircleInput['What the world needs'].mission, newCircleInput['What the world needs'].vocation, newCircleInput['What the world needs'].conclusion],
+          },
+        }),
       });
-      
-      if (response.ok) {
-        alert('Your Ikigai Map has been submitted successfully!');
-        resetAll(); // Optionally reset after submission
-      } else {
-        alert('Submission failed. Please try again.');
+      if (!response.ok) {
+        throw new Error(`Error resetting in backend: ${response.statusText}`);
       }
+      console.log('Reset successful:', await response.json());
     } catch (error) {
-      console.error('Error submitting Ikigai Map:', error);
-      alert('An error occurred while submitting.');
+      console.error('Error resetting in backend:', error);
     }
-  }
-};*/}
+
+};
+
    return (
     <div className={styles.main_container}>
       <div className={styles.left_branch}>
@@ -497,7 +659,7 @@ const resetThisCircle = () => {
     </button>
 
     {areAllConclusionsFilled && modal === 'What you are good at' && (
-  <button className={styles.complete_button} onClick={closeModal}>
+  <button className={styles.complete_button} onClick={handleSubmit}>
     Complete This Circle
   </button>
 )}

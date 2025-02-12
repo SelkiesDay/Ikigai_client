@@ -5,23 +5,27 @@ import styles from './SignUp.module.css';
 export default function SignUp() {
   const navigate = useNavigate();
 
-  // Declare state to store form input values
-  const [name, setName] = useState('');
+  // Pre-fill form with provided user data
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dob, setDob] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // Handle the form submission
   const handleSignUp = async (event) => {
-    event.preventDefault(); // Prevent page reload
+    event.preventDefault(); 
   
     // Send form data to backend server
-    const response = await fetch('http://localhost:3000/register', {
+    const response = await fetch('https://8955-78-29-192-45.ngrok-free.app/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: name,  // Sending name as username to backend
+        first_name: firstName,
+        last_name: lastName,
+        dob: dob,
         email: email,
         password: password,
       }),
@@ -30,14 +34,13 @@ export default function SignUp() {
     const data = await response.json();
   
     if (data.error) {
-      alert(data.error); // Show error message from server
+      alert(data.error); 
     } else {
       alert('Sign Up successful!');
-      navigate("/congratulations"); // Navigate to congratulations page if signup is successful
+      navigate("/congratulations"); 
     }
   };
   
-
   return (
     <div className={styles.container}>
       <div><span className={styles.title}>Ikiga-i</span></div>
@@ -45,14 +48,35 @@ export default function SignUp() {
       
       <form onSubmit={handleSignUp}>
         <div className={styles.name}>
-            <label htmlFor="name">Name</label> <br />
+            <label htmlFor="first_name">First Name</label> <br />
             <input 
-              id="name" 
+              id="first_name" 
               className={styles.name} 
               type="text" 
-              placeholder="Enter your name" 
-              value={name} 
-              onChange={(e) => setName(e.target.value)} 
+              placeholder="Enter your first name" 
+              value={firstName} 
+              onChange={(e) => setFirstName(e.target.value)} 
+            />
+        </div>
+        <div className={styles.name}>
+            <label htmlFor="last_name">Last Name</label> <br />
+            <input 
+              id="last_name" 
+              className={styles.name} 
+              type="text" 
+              placeholder="Enter your last name" 
+              value={lastName} 
+              onChange={(e) => setLastName(e.target.value)} 
+            />
+        </div>
+        <div className={styles.dob}>
+            <label htmlFor="dob">Date of Birth</label> <br />
+            <input 
+              id="dob" 
+              className={styles.dob} 
+              type="date" 
+              value={dob} 
+              onChange={(e) => setDob(e.target.value)} 
             />
         </div>
         <div className={styles.email}>
@@ -89,4 +113,3 @@ export default function SignUp() {
     </div>
   );
 }
-

@@ -20,7 +20,7 @@ export function Me() {
         />
         <span id={styles.change_password}  > Change Password</span>
         <span id={styles.delete_account} > Delete my account</span>
-      <button onClick={() => navigate("/explore")}>Return to Explore</button>
+      {/* <button onClick={() => navigate("/explore")}>Return to Explore</button> */}
     
     </div>
   );

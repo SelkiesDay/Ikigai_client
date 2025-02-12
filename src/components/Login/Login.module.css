@@ -42,7 +42,7 @@ form{
 
 .login_button{
     margin-top: 10px;
-    margin-left: 80px;
+    margin-left: 10px;
     background-color: #b8b7b7;;
     color: white;
     font-size: 13px;
@@ -68,24 +68,23 @@ input{
     font-family: "Ariel", sans-serif;
 }
 
-.alternative{
+/* .alternative{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-}
+} */
 
-.or{
+/* .or{
     margin-top: 10px;
-}
+} */
 
 .line{
-    margin-top: 20px;
+    margin-left: 50px;
 }
 
 
 .signup_container{
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,15 +92,15 @@ input{
 
 
 .signup_button{
-background-color: #b8b7b7;
-color: white;
-font-size: 13px;
-border: none;
-border-radius: 11px;
-cursor: pointer;
-transition: transform 0.2s, background-color 0.2s;
-padding: 5px 10px;
-padding-bottom: 5px;
+    background-color: #b8b7b7;
+    color: white;
+    font-size: 13px;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    padding: 5px 10px;
+    padding-bottom: 5px;
 }
 
 

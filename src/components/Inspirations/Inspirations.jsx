@@ -107,13 +107,9 @@ const Inspirations = () => {
       ))}
 
       <div id={styles.button_container} className="text-center mt-10" >
-      <button onClick={() => navigate("/explore")} className="px-6 py-2  hover:bg-gray-400 transition-colors rounded-2xl">Return to Explore</button>
-         {/* <div className={styles.previous} onClick={() => navigate("/explore")}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="25" height="27"  >
-              <path stroke="#D9D9D9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"  d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-            </svg>
-           </div> */}
-        
+      <button 
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="px-6 py-2 hover:bg-gray-400 transition-colors rounded-2xl">Return to the top</button>
       </div>
     </div>
     </div>

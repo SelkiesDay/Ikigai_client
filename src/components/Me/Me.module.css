@@ -15,6 +15,7 @@ cursor: pointer;
 transition: cursor 500ms ease-in-out;
 padding: 5px 10px;
 padding-bottom: 5px;
+font-weight: bold;
 }
 
 #change_password:hover {
@@ -27,6 +28,7 @@ padding-bottom: 5px;
     transition: cursor 500ms ease-in-out;
     padding: 5px 10px;
     padding-bottom: 5px;
+    font-weight: bold;
 }
 
 #delete_account:hover {
@@ -34,7 +36,7 @@ padding-bottom: 5px;
 }
 #page_title{
     margin-top: 20px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 600;
 }
 

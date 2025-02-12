@@ -20,9 +20,9 @@ return (
                     <ellipse cx="19.3178" cy="32.8924" rx="19.3178" ry="19.1089" fill="#D9D9D9" fillOpacity="0.5"/>
                 </svg>
         </div>
-        <div>
+        {/* <div>
             <button onClick={() => navigate("/explore")} className="px-6 py-2 bg-gray-200 text-black text-lg font-gotu  hover:bg-gray-400 transition-colors rounded-2xl">Return to Explore</button>
-        </div>
+        </div> */}
     </div>
 ) 
 }

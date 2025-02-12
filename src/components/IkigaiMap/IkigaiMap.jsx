@@ -19,7 +19,7 @@ export default function IkigaiMap() {
   };
 
 const storedTitle = localStorage.getItem('ikigaiMapTitle');
-const initialTitle = storedTitle || 'Create your ikigai map'; // Default title if not found
+const initialTitle = storedTitle || 'Create your ikigai map'; 
 
 const storedData = loadFromLocalStorage('ikigaiMapData');
 const [title, setTitle] = useState(initialTitle);
@@ -34,7 +34,7 @@ const navigate = useNavigate();
       'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
     });
 
-const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal visibility
+const [isModalOpen, setIsModalOpen] = useState(false); 
 
 // Load data from local storage on mount
 useEffect(() => {
@@ -48,7 +48,7 @@ useEffect(() => {
 useEffect(() => {
   try {
     localStorage.setItem('ikigaiMapData', JSON.stringify(circleInput));
-    console.log('Data saved to local storage:', circleInput); // Debugging
+    console.log('Data saved to local storage:', circleInput);
   } catch (error) {
     console.error('Error saving to local storage:', error);
   }
@@ -101,12 +101,12 @@ const areAllConclusionsFilled = Object.values(circleInput).every(
 
 const openModal = (section) => {
   setModal(section);
-  setIsModalOpen(true); // Show modal
+  setIsModalOpen(true);
 };
 
 const closeModal = () => {
   setModal(null);
-  setIsModalOpen(false); // Hide modal
+  setIsModalOpen(false);
 };
 
 useEffect(() => {
@@ -121,7 +121,7 @@ useEffect(() => {
       <div className={styles.left_branch}>
         <svg width="250" height="200" viewBox="0 0 199 77" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1.01896 69C4.01896 70.3333 13.519 72.2 27.519 69C45.019 65 52.519 64 58.519 61C64.519 59 95.519 31.5 108.019 31.5C103.519 27.5 105.519 22 110.519 19C112.519 23 112.519 29.5 109.519 31.5C114.519 30 128.019 23.5 131.019 23.5C129.019 20.5 129.519 17 134.519 15C135.019 20 135.519 21.5 132.519 23.5C137.319 22.7 142.186 21.1667 144.019 20.5C141.686 19.6667 138.219 16 143.019 8C146.019 12.5 148.019 15 146.019 19C148.019 18 153.519 15 153.519 13C152.019 10 153.019 3 157.519 1C160.019 8 160.019 11.5 154.519 13.5C150.019 18.5 150.019 18.5 146.019 21C149.519 21.5 157.519 24 162.519 19.5C163.519 14 165.019 11.5 170.019 11C171.019 14.5 169.519 20.5 163.519 20C161.519 21 161.019 21 161.019 21.5C161.019 22 168.519 21 168.519 27C161.019 27.5 160.019 26.5 159.519 21.5C157.919 22.3 152.186 22.5 149.519 22.5C152.519 22.5 158.619 24.5 159.019 32.5C155.019 31.5 150.019 29.5 148.519 23.5C146.019 22.5 140.019 23 138.519 24.5C141.019 25 146.019 29 146.019 34C142.519 33.5 136.519 30.5 136.519 25.5C132.019 25.5 127.019 25 119.019 31.5C122.019 32.5 136.519 38.5 148.019 40C159.519 39.5 175.519 34.5 182.019 29C182.519 24.5 185.519 21.5 192.019 21.5C191.019 29 186.019 30.5 181.519 30C178.019 32.5 164.019 40 161.019 40C162.519 40.5 186.019 38 189.019 35.5C190.019 31.5 193.019 29.5 198.019 33C195.519 36.5 196.019 36.3481 189.019 37C184.619 36.6 182.519 38.1667 182.019 39C185.019 38.8333 190.819 40.4 190.019 48C184.019 47 182.019 45 181.019 39C176.019 38.6556 168.019 40.5 167.519 41C167.019 41.5 178.019 41 177.019 51.5C170.019 51 165.519 44.2196 166.019 42C162.519 41 155.019 40.5 150.519 42C146.519 42 146.019 43 116.019 34.5C108.019 33.5 95.519 35.5 81.019 51.5C84.019 52 101.519 63 111.519 52C110.519 46.5 108.519 42.5 117.019 39C117.89 46.8419 116.104 49.749 113.977 51.0288C116.578 50.2197 122.3 48.8203 125.019 49.5C128.019 46.5 136.519 46 141.019 52C134.019 55 130.519 55.5 124.519 50.5C117.019 50.2077 117.019 50.5 104.519 58C105.019 59 116.019 60 117.519 58.5C120.019 57.5 123.519 54.5 127.519 65C118.019 64 118.019 61.5 117.019 60C115.519 60 115.019 59 108.519 60C110.519 62.5 115.019 66 111.519 73.5C106.019 71 105.019 65 106.019 60C99.519 60 90.019 58.5 83.019 54.5C78.019 54 76.519 53 68.519 60C58.519 67.5 46.019 70 23.019 73.5C4.61896 76.3 0.685629 76 1.01896 75.5V69Z" fill="#D9D9D9" fillOpacity="0.5"/>
-          <path d="M1.01896 69C4.01896 70.3333 13.519 72.2 27.519 69C45.019 65 52.519 64 58.519 61C64.519 59 95.519 31.5 108.019 31.5C103.519 27.5 105.519 22 110.519 19C112.519 23 112.519 29.5 109.519 31.5C114.519 30 128.019 23.5 131.019 23.5C129.019 20.5 129.519 17 134.519 15C135.019 20 135.519 21.5 132.519 23.5C137.319 22.7 142.186 21.1667 144.019 20.5C141.686 19.6667 138.219 16 143.019 8C146.019 12.5 148.019 15 146.019 19C148.019 18 153.519 15 153.519 13C152.019 10 153.019 3 157.519 1C160.019 8 160.019 11.5 154.519 13.5C150.019 18.5 150.019 18.5 146.019 21C149.519 21.5 157.519 24 162.519 19.5C163.519 14 165.019 11.5 170.019 11C171.019 14.5 169.519 20.5 163.519 20C161.519 21 161.019 21 161.019 21.5C161.019 22 168.519 21 168.519 27C161.019 27.5 160.019 26.5 159.519 21.5C157.919 22.3 152.186 22.5 149.519 22.5C152.519 22.5 158.619 24.5 159.019 32.5C155.019 31.5 150.019 29.5 148.519 23.5C146.019 22.5 140.019 23 138.519 24.5C141.019 25 146.019 29 146.019 34C142.519 33.5 136.519 30.5 136.519 25.5C132.019 25.5 127.019 25 119.019 31.5C122.019 32.5 136.519 38.5 148.019 40C159.519 39.5 175.519 34.5 182.019 29C182.519 24.5 185.519 21.5 192.019 21.5C191.019 29 186.019 30.5 181.519 30C178.019 32.5 164.019 40 161.019 40C162.519 40.5 186.019 38 189.019 35.5C190.019 31.5 193.019 29.5 198.019 33C195.519 36.5 196.019 36.3481 189.019 37C184.619 36.6 182.519 38.1667 182.019 39C185.019 38.8333 190.819 40.4 190.019 48C184.019 47 182.019 45 181.019 39C176.019 38.6556 168.019 40.5 167.519 41C167.019 41.5 178.019 41 177.019 51.5C170.019 51 165.519 44.2196 166.019 42C162.519 41 155.019 40.5 150.519 42C146.519 42 146.019 43 116.019 34.5C108.019 33.5 95.519 35.5 81.019 51.5C84.019 52 101.519 63 111.519 52C110.519 46.5 108.519 42.5 117.019 39C118.019 48 115.519 50.5 113.019 51.5C110.519 52 121.019 48.5 125.019 49.5C128.019 46.5 136.519 46 141.019 52C134.019 55 130.519 55.5 124.519 50.5C117.019 50.2077 117.019 50.5 104.519 58C105.019 59 116.019 60 117.519 58.5C120.019 57.5 123.519 54.5 127.519 65C118.019 64 118.019 61.5 117.019 60C115.519 60 115.019 59 108.519 60C110.519 62.5 115.019 66 111.519 73.5C106.019 71 105.019 65 106.019 60C99.519 60 90.019 58.5 83.019 54.5C78.019 54 76.519 53 68.519 60C58.519 67.5 46.019 70 23.019 73.5C4.61896 76.3 0.685629 76 1.01896 75.5V69Z" stroke="#D9D9D9" strokeOpacity="0.5"/>
+          <path d="M1.01896 69C4.01896 70.3333 13.519 72.2 27.519 69C45.019 65 52.519 64 58.519 61C64.519 59 95.519 31.5 108.019 31.5C103.519 27.5 105.519 22 110.519 19C112.519 23 112.519 29.5 109.519 31.5C114.519 30 128.019 23.5 131.019 23.5C129.019 20.5 129.519 17 134.519 15C135.019 20 135.519 21.5 132.519 23.5C137.319 22.7 142.186 21.1667 144.019 20.5C141.686 19.6667 138.219 16 143.019 8C146.019 12.5 148.019 15 146.019 19C148.019 18 153.519 15 153.519 13C152.019 10 153.019 3 157.519 1C160.019 8 160.019 11.5 154.519 13.5C150.019 18.5 150.019 18.5 146.019 21C149.519 21.5 157.519 24 162.519 19.5C163.519 14 165.019 11.5 170.019 11C171.019 14.5 169.519 20.5 163.519 20C161.519 21 161.019 21 161.019 21.5C161.019 22 168.519 21 168.519 27C161.019 27.5 160.019 26.5 159.519 21.5C157.919 22.3 152.186 22.5 149.519 22.5C152.519 22.5 158.619 24.5 159.019 32.5C155.019 31.5 150.019 29.5 148.519 23.5C146.019 22.5 140.019 23 138.519 24.5C141.019 25 146.019 29 146.019 34C142.519 33.5 136.519 30.5 136.519 25.5C132.019 25.5 127.019 25 119.019 31.5C122.019 32.5 136.519 38.5 148.019 40C159.519 39.5 175.519 34.5 182.019 29C182.519 24.5 185.519 21.5 192.019 21.5C191.019 29 186.019 30.5 181.519 30C178.019 32.5 164.019 40 161.019 40C162.519 40.5 186.019 38 189.019 35.5C190.019 31.5 193.019 29.5 198.019 33C195.519 36.5 196.019 36.3481 189.019 37C184.619 36.6 182.519 38.1667 182.019 39C185.019 38.8333 190.819 40.4 190.019 48C184.019 47 182.019 45 181.019 39C176.019 38.6556 168.019 40.5 167.519 41C167.019 41.5 178.019 41 177.019 51.5C170.019 51 165.519 44.2196 166.019 42C162.519 41 155.019 40.5 150.519 42C146.519 42 146.019 43 116.019 34.5C108.019 33.5 95.519 35.5 81.019 51.5C84.019 52 101.519 63 111.519 52C110.519 46.5 108.519 42.5 117.019 39C118.019 48 115.519 50.5 113.019 51.5C110.519 52 121.019 48.5 125.019 49.5C128.019 46.5 136.519 46 141.019 52C134.019 55 130.519 55.5 124.519 50.5C117.019 50.2077 117.019 50.5 104.519 58C105.019 59 116.019 60 117.519 58.5C120.019 57.5 123.519 54.5 127.519 65C118.019 64 118.019 61.5 117.019 œ.519 60 115.019 59 108.519 60C110.519 62.5 115.019 66 111.519 73.5C106.019 71 105.019 65 106.019 60C99.519 60 90.019 58.5 83.019 54.5C78.019 54 76.519 53 68.519 60C58.519 67.5 46.019 70 23.019 73.5C4.61896 76.3 0.685629 76 1.01896 75.5V69Z" stroke="#D9D9D9" strokeOpacity="0.5"/>
         </svg>
       </div>
       <div className={styles.right_branch}>
@@ -151,7 +151,7 @@ useEffect(() => {
               cy="91.5"
               rx="92.5"
               ry="91.5"
-              fill="#D9D9D9"
+              fill="#ffe6ff"
               fillOpacity="0.45"
               onClick={() => openModal('What you love')}
               style={{ cursor: 'pointer' }}
@@ -161,20 +161,20 @@ useEffect(() => {
             x="155.5"
             y="35"
             textAnchor="middle"
-            fontSize="12" // Fixed font size
+            fontSize="12" 
             fontWeight="normal"
             fill="black"
           >
             {circleInput['What you love'].conclusion
               .split(' ')
-              .slice(0, 15) // Limit to 15 words for 3 lines (5 words per line)
-              .join(' ') // Combine into a single string
-              .match(/.{1,20}/g) // Split into chunks for wrapping
-              ?.slice(0, 3) // Limit to 3 lines
+              .slice(0, 15) 
+              .join(' ') 
+              .match(/.{1,20}/g) 
+              ?.slice(0, 3) 
               .map((line, index) => (
                 <tspan
                   x="155.5"
-                  dy={index === 0 ? 0 : 14} // Vertical offset for each line
+                  dy={index === 0 ? 0 : 14} 
                   key={index}
                 >
                   {line.trim()}
@@ -190,7 +190,7 @@ useEffect(() => {
               cy="214.5"
               rx="92.5"
               ry="91.5"
-              fill="#D9D9D9"
+              fill="#ffe6ff"
               fillOpacity="0.45"
               onClick={() => openModal('What you can be paid for')}
               style={{ cursor: 'pointer' }}
@@ -198,7 +198,7 @@ useEffect(() => {
             {circleInput['What you can be paid for'].conclusion && (
               <text
                 x="155.5"
-                y="260" // Adjusted for better alignment
+                y="260" 
                 textAnchor="middle"
                 fontSize="12"
                 fontWeight="normal"
@@ -206,14 +206,14 @@ useEffect(() => {
               >
                 {circleInput['What you can be paid for'].conclusion
               .split(' ')
-              .slice(0, 15) // Limit to 15 words for 3 lines (5 words per line)
-              .join(' ') // Combine into a single string
-              .match(/.{1,20}/g) // Split into chunks for wrapping
-              ?.slice(0, 3) // Limit to 3 lines
+              .slice(0, 15) 
+              .join(' ') 
+              .match(/.{1,20}/g) 
+              ?.slice(0, 3) 
               .map((line, index) => (
                 <tspan
                   x="155.5"
-                  dy={index === 0 ? 0 : 14} // Vertical offset for each line
+                  dy={index === 0 ? 0 : 14} 
                   key={index}
                 >
                   {line.trim()}
@@ -228,7 +228,7 @@ useEffect(() => {
             cy="154.5"
             rx="92.5"
             ry="91.5"
-            fill="#D9D9D9"
+            fill="#ffe6ff"
             fillOpacity="0.5"
             onClick={() => openModal('What you are good at')}
             style={{ cursor: 'pointer' }}
@@ -236,7 +236,7 @@ useEffect(() => {
           {circleInput['What you are good at'].conclusion && (
             <text
               x="30.5"
-              y="155" // Adjusted for better alignment
+              y="155" 
               textAnchor="middle"
               fontSize="11"
               fontWeight="normal"
@@ -244,14 +244,14 @@ useEffect(() => {
             >
               {circleInput['What you are good at'].conclusion
             .split(' ')
-            .slice(0, 15) // Limit to 15 words for 3 lines (5 words per line)
-            .join(' ') // Combine into a single string
-            .match(/.{1,15}/g) // Split into chunks for wrapping
-            ?.slice(0, 3) // Limit to 3 lines
+            .slice(0, 15) 
+            .join(' ') 
+            .match(/.{1,15}/g) 
+            ?.slice(0, 3) 
             .map((line, index) => (
               <tspan
                 x="50"
-                dy={index === 0 ? 0 : 14} // Vertical offset for each line
+                dy={index === 0 ? 0 : 14} 
                 key={index}
               >
                 {line.trim()}
@@ -266,7 +266,7 @@ useEffect(() => {
             cy="154.5"
             rx="92.5"
             ry="91.5"
-            fill="#D9D9D9"
+            fill="#ffe6ff"
             fillOpacity="0.5"
             onClick={() => openModal('What the world needs')}
             style={{ cursor: 'pointer' }}
@@ -274,7 +274,7 @@ useEffect(() => {
           {circleInput['What the world needs'].conclusion && (
             <text
               x="282.5"
-              y="155" // Adjusted for better alignment
+              y="155" 
               textAnchor="middle"
               fontSize="11"
               fontWeight="normal"
@@ -282,14 +282,14 @@ useEffect(() => {
             >
               {circleInput['What the world needs'].conclusion
             .split(' ')
-            .slice(0, 10) // Limit to 15 words for 3 lines (5 words per line)
-            .join(' ') // Combine into a single string
-            .match(/.{1,15}/g) // Split into chunks for wrapping
-            ?.slice(0, 3) // Limit to 3 lines
+            .slice(0, 10) 
+            .join(' ') 
+            .match(/.{1,15}/g) 
+            ?.slice(0, 3) 
             .map((line, index) => (
               <tspan
                 x="260.5"
-                dy={index === 0 ? 0 : 14} // Vertical offset for each line
+                dy={index === 0 ? 0 : 14} 
                 key={index}
               >
                 {line.trim()}

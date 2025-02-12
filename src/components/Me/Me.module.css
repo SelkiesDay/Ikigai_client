@@ -14,7 +14,7 @@ border-radius: 10px;
 cursor: pointer;
 transition: cursor 500ms ease-in-out;
 padding: 5px 10px;
-padding-bottom: 5px;
+/* padding-bottom: 5px; */
 font-weight: bold;
 }
 
@@ -26,7 +26,7 @@ font-weight: bold;
     border-radius: 10px;
     cursor: pointer;
     transition: cursor 500ms ease-in-out;
-    padding: 5px 10px;
+    /* padding: 5px 10px; */
     padding-bottom: 5px;
     font-weight: bold;
 }
@@ -35,7 +35,8 @@ font-weight: bold;
     transform: scale(1.05);
 }
 #page_title{
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
     font-size: 30px;
     font-weight: 600;
 }

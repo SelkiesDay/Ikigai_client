@@ -14,7 +14,7 @@
 
 
 button{
-  /* background-color: #b8b7b7; */
+  background-color: #ffe6ff;
   color: white;
   font-size: 20px !important; 
   border: none;
@@ -36,7 +36,7 @@ button:hover {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(177, 201, 238, 0.3); 
+  /* background: rgba(177, 201, 238, 0.3);  */
   backdrop-filter: blur(5px);    
   z-index: 10;
 }

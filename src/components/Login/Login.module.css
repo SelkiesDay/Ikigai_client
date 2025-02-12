@@ -9,106 +9,115 @@
     flex-direction: column; 
     justify-content: center; 
     align-items: center; 
-    font-family: "Tsukimi rounded";
-    
+    font-family: "Tsukimi Rounded", sans-serif;
 }
 
-.title{
+.title, .login_title {
     margin-top: 30px;
 }
 
-.login_title{
-    margin-top: 30px;
-}
-
-.login_title .subtitle{
+.login_title .subtitle {
    font-size: 26px;
    margin-left: 0;
 }
 
-
-.login_container{
+.login_container, .signup_container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-form{
+form {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
 }
 
-.login_button{
-    margin-top: 10px;
-    margin-left: 10px;
-    background-color: #b8b7b7;;
-    color: white;
-    font-size: 13px;
-    border: none;
-    border-radius: 11px;
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
-    padding: 5px 10px;
-    padding-bottom: 5px;
-}
-
-.login_button:hover {
-    transform: scale(1.05);
-}
-
-input{
+input {
     width: 219px;
     height: 32px;
     border-radius: 10px;
     border: none;
     background-color: rgb(235, 235, 235);
     padding: 10px;
-    font-family: "Ariel", sans-serif;
+    font-family: "Arial", sans-serif;
 }
 
-/* .alternative{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-} */
-
-/* .or{
-    margin-top: 10px;
-} */
-
-.line{
+.line {
     margin-left: 50px;
 }
 
-
-.signup_container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.createAccount {
+    margin-top: 10px;
 }
 
-
-.signup_button{
-    background-color: #b8b7b7;
-    color: white;
+/* Button Styles */
+.login_button, .signup_button {
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: #ffe6ff;
+    color: black;
     font-size: 13px;
     border: none;
-    border-radius: 11px;
+    border-radius: 11px; 
     cursor: pointer;
     transition: transform 0.2s, background-color 0.2s;
-    padding: 5px 10px;
-    padding-bottom: 5px;
+    padding: 10px 20px; 
+    width: 200px; 
+    height: 40px; 
+    display: flex;             /* Use flexbox for centering */
+    justify-content: center;   /* Center horizontally */
+    align-items: center;       /* Center vertically */
+    text-align: center;   
 }
 
-
-
-.signup_button:hover {
+/* Hover Effect */
+.login_button:hover, .signup_button:hover {
     transform: scale(1.05);
+    background-color: #ffccff; 
 }
 
-.createAccount{
-    margin-top: 10px;
+/* Optional Active State (to keep size consistent when clicked) */
+.login_button:active, .signup_button:active {
+    transform: scale(1); 
+    background-color: #ffb3ff; 
+}
+
+/* Error Popup Styles */
+.error_popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff4d4d;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 250px;
+    max-width: 350px;
+}
+
+/* Close Button */
+.error_popup button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-left: auto
+}
+
+.error_popup button:hover {
+    color: #ffcccc;
 }

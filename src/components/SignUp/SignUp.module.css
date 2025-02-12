@@ -38,16 +38,24 @@ form{
 }
 
 .signup_button{
-    background-color: #b8b7b7;;
-    color: white;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: #ffe6ff;
+    color: black;
     font-size: 13px;
     border: none;
-    border-radius: 11px;
+    border-radius: 11px; 
     cursor: pointer;
     transition: transform 0.2s, background-color 0.2s;
-    padding: 5px 10px;
-    padding-bottom: 5px;
+    padding: 10px 20px; 
+    width: 200px; 
+    height: 40px; 
+    display: flex;             /* Use flexbox for centering */
+    justify-content: center;   /* Center horizontally */
+    align-items: center;       /* Center vertically */
+    text-align: center;   
 }
+
 
 .signup_button:hover {
     transform: scale(1.05);

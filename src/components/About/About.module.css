@@ -26,8 +26,8 @@
   .logo {
     margin-top: 20px;
     margin-bottom: 25px;
-    display: inline-block; /* Ensure it stays in line */
-    animation: spin 7s linear infinite; /* Spin continuously */
+    display: inline-block; 
+    animation: spin 7s linear infinite; 
   }
 
 

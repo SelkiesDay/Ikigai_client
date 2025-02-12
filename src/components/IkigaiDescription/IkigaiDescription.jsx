@@ -18,7 +18,7 @@ function IkigaiDescription (){
             <button className={styles.button} onClick={()=>navigate("/login")}>
                 Continue
             </button>
-            <BackButton>Back</BackButton>
+            {/* <BackButton>Back</BackButton> */}
             </div>
             
         </div>

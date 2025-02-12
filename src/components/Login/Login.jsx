@@ -19,7 +19,7 @@ function Login() {
         },
         body: JSON.stringify({ email, password }),
       });
-
+      
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }

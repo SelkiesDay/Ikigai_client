@@ -115,9 +115,54 @@ useEffect(() => {
   }
 }, [circleInput]);
 
+const resetAll = () => {
+  const initialData = {
+    'What you love': { passion: '', mission: '', conclusion: '' },
+    'What the world needs': { mission: '', vocation: '', conclusion: '' },
+    'What you are good at': { passion: '', profession: '', conclusion: '' },
+    'What you can be paid for': { vocation: '', profession: '', conclusion: '' },
+  };
+  setCircleInput(initialData);
+  localStorage.setItem('ikigaiMapData', JSON.stringify(initialData)); // Update local storage
+  setTitle('Create your ikigai map'); // Reset the title
+};
 
+const resetThisCircle = () => {
+  const newCircleInput = { ...circleInput };
+  newCircleInput[modal] = {
+    passion: '',
+    mission: '',
+    vocation: '',
+    profession: '',
+    conclusion: '',
+  };
+  setCircleInput(newCircleInput);
+  localStorage.setItem('ikigaiMapData', JSON.stringify(newCircleInput)); // Update local storage
+};
+
+{/*const handleSubmit = async () => {
+  if (areAllConclusionsFilled) {
+    try {
+      const response = await fetch('/api/submit-ikigai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(circleInput),
+      });
+      
+      if (response.ok) {
+        alert('Your Ikigai Map has been submitted successfully!');
+        resetAll(); // Optionally reset after submission
+      } else {
+        alert('Submission failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting Ikigai Map:', error);
+      alert('An error occurred while submitting.');
+    }
+  }
+};*/}
    return (
-     <div className={styles.main_container}>
+    <div className={styles.main_container}>
       <div className={styles.left_branch}>
         <svg width="250" height="200" viewBox="0 0 199 77" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1.01896 69C4.01896 70.3333 13.519 72.2 27.519 69C45.019 65 52.519 64 58.519 61C64.519 59 95.519 31.5 108.019 31.5C103.519 27.5 105.519 22 110.519 19C112.519 23 112.519 29.5 109.519 31.5C114.519 30 128.019 23.5 131.019 23.5C129.019 20.5 129.519 17 134.519 15C135.019 20 135.519 21.5 132.519 23.5C137.319 22.7 142.186 21.1667 144.019 20.5C141.686 19.6667 138.219 16 143.019 8C146.019 12.5 148.019 15 146.019 19C148.019 18 153.519 15 153.519 13C152.019 10 153.019 3 157.519 1C160.019 8 160.019 11.5 154.519 13.5C150.019 18.5 150.019 18.5 146.019 21C149.519 21.5 157.519 24 162.519 19.5C163.519 14 165.019 11.5 170.019 11C171.019 14.5 169.519 20.5 163.519 20C161.519 21 161.019 21 161.019 21.5C161.019 22 168.519 21 168.519 27C161.019 27.5 160.019 26.5 159.519 21.5C157.919 22.3 152.186 22.5 149.519 22.5C152.519 22.5 158.619 24.5 159.019 32.5C155.019 31.5 150.019 29.5 148.519 23.5C146.019 22.5 140.019 23 138.519 24.5C141.019 25 146.019 29 146.019 34C142.519 33.5 136.519 30.5 136.519 25.5C132.019 25.5 127.019 25 119.019 31.5C122.019 32.5 136.519 38.5 148.019 40C159.519 39.5 175.519 34.5 182.019 29C182.519 24.5 185.519 21.5 192.019 21.5C191.019 29 186.019 30.5 181.519 30C178.019 32.5 164.019 40 161.019 40C162.519 40.5 186.019 38 189.019 35.5C190.019 31.5 193.019 29.5 198.019 33C195.519 36.5 196.019 36.3481 189.019 37C184.619 36.6 182.519 38.1667 182.019 39C185.019 38.8333 190.819 40.4 190.019 48C184.019 47 182.019 45 181.019 39C176.019 38.6556 168.019 40.5 167.519 41C167.019 41.5 178.019 41 177.019 51.5C170.019 51 165.519 44.2196 166.019 42C162.519 41 155.019 40.5 150.519 42C146.519 42 146.019 43 116.019 34.5C108.019 33.5 95.519 35.5 81.019 51.5C84.019 52 101.519 63 111.519 52C110.519 46.5 108.519 42.5 117.019 39C117.89 46.8419 116.104 49.749 113.977 51.0288C116.578 50.2197 122.3 48.8203 125.019 49.5C128.019 46.5 136.519 46 141.019 52C134.019 55 130.519 55.5 124.519 50.5C117.019 50.2077 117.019 50.5 104.519 58C105.019 59 116.019 60 117.519 58.5C120.019 57.5 123.519 54.5 127.519 65C118.019 64 118.019 61.5 117.019 60C115.519 60 115.019 59 108.519 60C110.519 62.5 115.019 66 111.519 73.5C106.019 71 105.019 65 106.019 60C99.519 60 90.019 58.5 83.019 54.5C78.019 54 76.519 53 68.519 60C58.519 67.5 46.019 70 23.019 73.5C4.61896 76.3 0.685629 76 1.01896 75.5V69Z" fill="#D9D9D9" fillOpacity="0.5"/>
@@ -387,10 +432,6 @@ useEffect(() => {
           </svg>
         </div>
         </div>
-        {/* <div className={styles.change_page}>
-            <span className={styles.next_page} onClick={() => navigate("/explore")}>next</span>
-        </div> */}
-
       {/* Modal Rendering */}
       {/* Overlay */}
       <div className={`${styles.overlay} ${isModalOpen ? '' : styles.hidden}`} onClick={closeModal}></div>
@@ -438,14 +479,44 @@ useEffect(() => {
               }}>
               Switch Circle
               </button>
-            {areAllConclusionsFilled && modal === 'What you are good at' && (
-              <button className={styles.complete_button} onClick={() => {closeModal();}}>Complete</button>)}
+
+              <button
+    className={styles.switch_button}
+    onClick={() => {
+      const sections = [
+        'What you love',
+        'What the world needs',
+        'What you can be paid for',
+        'What you are good at',
+      ];
+      const currentIndex = sections.indexOf(modal);
+      const prevIndex = (currentIndex - 1 + sections.length) % sections.length;
+      setModal(sections[prevIndex]);
+    }}>
+    Previous Circle
+    </button>
+
+    {areAllConclusionsFilled && modal === 'What you are good at' && (
+  <button className={styles.complete_button} onClick={closeModal}>
+    Complete This Circle
+  </button>
+)}
+
+ 
+ {/*{areAllConclusionsFilled && modal === 'What you are good at' && (
+   <button className={styles.complete_button} onClick={() => {closeModal();}}>Complete</button>)}*/}
           </div>
         <div className={styles.close_button}>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 11L11 1M1 1L11 11" stroke="#E55430" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" onClick={closeModal}/>
           </svg>
-        </div>
+        </div>    
+<button onClick={resetThisCircle} className={styles.reset_button}>
+  Reset This Circle
+</button>
+<button onClick={resetAll} className={styles.reset_button}>
+  Reset All
+</button>
       </div>
       )}
       </div>

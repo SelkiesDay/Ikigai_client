@@ -12,11 +12,9 @@
   margin-top: 0;
 }
 
-
-button{
-  background-color: #ffe6ff;
+button {
   color: white;
-  font-size: 20px !important; 
+  font-size: 50px;
   border: none;
   border-radius: 11px;
   cursor: pointer;

@@ -95,8 +95,8 @@ const handleConclusion = (section, text) => {
   setCircleInput((previousState) => ({...previousState, [section]: { ...previousState[section], conclusion: text },}));};
     
 const areAllConclusionsFilled = Object.values(circleInput).every(
-    (section) => section.conclusion.trim() !== ''
-  );
+    (section) => section.conclusion && section.conclusion.trim() !== ''
+);
 
 const openModal = (section) => {
   setModal(section);
